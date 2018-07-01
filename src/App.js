@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { YellowBox, View, SafeAreaView } from 'react-native';
-import { Provider, observer, inject } from 'mobx-react';
-import Router from './Router';
+import { observer, inject } from 'mobx-react';
+import Router from './navigation/Router';
 import RootStore from './stores/RootStore';
+import withStoreProvider from './enhancers/withStoreProvider';
 
+@withStoreProvider()
+@inject('navigationStore')
+@observer
 class App extends Component {
   constructor(props) {
     super(props);
@@ -19,9 +23,13 @@ class App extends Component {
 
   render() {
     return (
-      <Provider {...this.rootStore.stores}>
-        <Router />
-      </Provider>
+      <View style={{flex: 1,alignSelf:'stretch', alignItems: 'center',justifyContent:'center'}} >
+         <Router
+          ref={(nav) => {
+            this.props.navigationStore.setNavigator(nav);
+        }}
+        />
+      </View>
     );
   }
 }

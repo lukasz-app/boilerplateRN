@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, SafeAreaView, Image, StatusBar } from 'react-native';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
-import styles from './styles';
+import { white } from 'ansi-colors';
+import { styles } from '.';
 
 
 @inject('navigationStore')
@@ -11,14 +12,21 @@ class App extends Component {
 static navigationOptions = {
   header: null,
 };
+  
+componentDidMount = () => {
+  setTimeout(() => {
+    this.props.navigationStore.navigate('Home')
+  },2000)
+};
+
 
 
 render() {
   return (
-    <View style={styles.continer} >
+    <View style={styles.container} >
       <StatusBar backgroundColor="transparent" barStyle="light-content" />
-      <Text>
-        {'APP'}
+      <Text style={{color: 'white'}}>
+        {'This is splash'}
       </Text>
     </View>
   );
