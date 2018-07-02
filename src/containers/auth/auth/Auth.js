@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, SafeAreaView, Image, StatusBar } from 'react-native';
 import { observer, inject } from 'mobx-react';
-import PropTypes from 'prop-types';
-import Router from './../../../navigation/Router';
 
 
 @inject('navigationStore')

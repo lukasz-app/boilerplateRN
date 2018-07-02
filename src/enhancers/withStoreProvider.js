@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { Provider } from 'mobx-react';
-import RootStore from '../stores/RootStore';
 
-// przekazywac store?
-const withStoreProvider = () => WrappedComponent =>
+const withStoreProvider = (root) => WrappedComponent =>
   class StoreProvider extends Component {
     constructor() {
       super();
-      this.rootStore = new RootStore();
+      this.rootStore = new root();
     }
     render() {
       return (

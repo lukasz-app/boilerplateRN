@@ -5,7 +5,7 @@ import Router from './navigation/Router';
 import RootStore from './stores/RootStore';
 import withStoreProvider from './enhancers/withStoreProvider';
 
-@withStoreProvider()
+@withStoreProvider(RootStore)
 @inject('navigationStore')
 @observer
 class App extends Component {
@@ -18,7 +18,6 @@ class App extends Component {
       'Warning: isMounted(...)',
     ]);
     console.disableYellowBox = true;
-    this.rootStore = new RootStore();
   }
 
   render() {
