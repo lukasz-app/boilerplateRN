@@ -18,7 +18,13 @@ const responder = PanResponder.create({
 
 const withDevMenuTrigger = WrappedComponent => props => (
   <View
-    style={{ flex: 1, backgroundColor: '#00000000' }}
+    style={{
+      flex: 1,
+      // background color value is important here,
+      // when not present breaks touch behaviour when combined with
+      // createSwitchNavigator from 'react-navigation'
+      backgroundColor: '#00000000',
+    }}
     {...responder.panHandlers}
   >
     <WrappedComponent {...props} />

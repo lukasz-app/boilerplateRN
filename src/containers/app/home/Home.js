@@ -25,9 +25,6 @@ componentDidMount = () => {
       navigate,
     },
   } = this.props;
-  setTimeout(() => {
-    navigate('Splash');
-  }, 3000);
 };
 
 render() {
