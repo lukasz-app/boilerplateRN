@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import { YellowBox, View, SafeAreaView } from 'react-native';
+import { YellowBox, View, StatusBar } from 'react-native';
 import { observer, inject } from 'mobx-react';
+import PropTypes from 'prop-types';
 import Router from './navigation/Router';
 import RootStore from './stores/RootStore';
 import withStoreProvider from './enhancers/withStoreProvider';
+import withDevMenuTrigger from './enhancers/withDevMenuTrigger';
 
+@withDevMenuTrigger
 @withStoreProvider(RootStore)
 @inject('navigationStore')
 @observer
-class App extends Component {
+export default class App extends Component {
+  static propTypes = {
+    navigationStore: PropTypes.shape(),
+  }
+
   constructor(props) {
     super(props);
     YellowBox.ignoreWarnings([
@@ -20,16 +27,24 @@ class App extends Component {
     console.disableYellowBox = true;
   }
 
+
   render() {
+    const {
+      navigationStore: {
+        setNavigator, onNavigationStateChange,
+      },
+    } = this.props;
     return (
-      <View style={{flex: 1,alignSelf:'stretch', alignItems: 'center',justifyContent:'center'}} >
-         <Router
-          ref={(nav) => {
-            this.props.navigationStore.setNavigator(nav);
-        }}
+      <View style={{
+        flex: 1,
+      }}
+      >
+        <StatusBar />
+        <Router
+          ref={setNavigator}
+          onNavigationStateChange={onNavigationStateChange}
         />
       </View>
     );
   }
 }
-export default App;

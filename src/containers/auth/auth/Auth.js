@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, SafeAreaView, Image, StatusBar } from 'react-native';
+import {
+  View, Text,
+} from 'react-native';
 import { observer, inject } from 'mobx-react';
+import styles from './styles';
 
 
 @inject('navigationStore')
 @observer
-class App extends Component {
+class Auth extends Component {
 static navigationOptions = {
   header: null,
 };
@@ -13,14 +16,13 @@ static navigationOptions = {
 
 render() {
   return (
-    <View style={{flex: 1, alignItems: 'center',justifyContent:'center'}} >
-      <Text>
+    <View style={styles.container}>
+      <Text style={styles.titleText}>
         {'Auth'}
-        </Text>
+      </Text>
     </View>
   );
 }
 }
 
-export default App;
-
+export default Auth;

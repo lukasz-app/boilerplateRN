@@ -1,6 +1,7 @@
 import { NavigationActions, StackActions } from 'react-navigation';
 import { action, computed, observable } from 'mobx';
 
+
 function getCurrentState(state) {
   const childRoute = state.routes[state.index];
   if (childRoute.routes) {
@@ -19,31 +20,37 @@ function getPrevState(state) {
 
 export default class NavigationStore {
   @observable navigator = null;
+
   @observable currentRouteName = '';
-  @observable previousRouteName = ''
 
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
 
-  @action.bound
-  setNavigator(navigator) {
+  @action
+  setNavigator = (navigator) => {
     this.navigator = navigator;
   }
 
   goBack = (key) => {
-    this.currentRouteName = this.getPrevRouteName();
     this.navigator.dispatch(NavigationActions.back({
       key,
     }));
   }
 
+  @action
   navigate = (routeName, params, navAction) => {
     this.navigator.dispatch(NavigationActions.navigate({
       routeName,
       params,
     }));
     this.currentRouteName = routeName;
+  }
+
+  onNavigationStateChange = (prevState, newState, navAction) => {
+    // console.log('On NavState Changed', prevState, newState, navAction);
+    console.log('Po navigacji, mój route to : ', this.getCurrentRouteName());
+    // this.currentRouteName = this.getCurrentRouteName();
   }
 
   resetAndNavigate = (routeName, params) => {
@@ -58,8 +65,7 @@ export default class NavigationStore {
   }
 
 
-  getCurrentRouteName = () =>
-    this.navigator && getCurrentState(this.navigator.state.nav).routeName;
+  getCurrentRouteName = () => this.navigator && getCurrentState(this.navigator.state.nav).routeName;
 
 
   getPrevRouteName = () => getPrevState(this.navigator.state.nav).routeName;

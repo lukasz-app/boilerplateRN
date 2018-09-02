@@ -1,31 +1,39 @@
 import React, { Component } from 'react';
-import { View, Text, SafeAreaView, Image, StatusBar } from 'react-native';
+import {
+  View, Text, InteractionManager,
+} from 'react-native';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
-import { white } from 'ansi-colors';
-import { styles } from '.';
-
+import styles from './styles';
+import NavigationStore from '../../../stores/NavigationStore';
 
 @inject('navigationStore')
 @observer
-class App extends Component {
+class Splash extends Component {
+  static propTypes = {
+    navigationStore: PropTypes.shape(NavigationStore),
+  }
+
 static navigationOptions = {
   header: null,
 };
-  
-componentDidMount = () => {
-  setTimeout(() => {
-    this.props.navigationStore.navigate('Home')
-  },2000)
-};
 
+componentDidMount = () => {
+  const {
+    navigationStore: {
+      navigate,
+    },
+  } = this.props;
+  setTimeout(() => {
+    navigate('Home');
+  }, 3000);
+};
 
 
 render() {
   return (
-    <View style={styles.container} >
-      <StatusBar backgroundColor="transparent" barStyle="light-content" />
-      <Text style={{color: 'white'}}>
+    <View style={styles.container}>
+      <Text style={styles.titleText}>
         {'This is splash'}
       </Text>
     </View>
@@ -33,14 +41,4 @@ render() {
 }
 }
 
-export default App;
-
-// App.propTypes = {
-//   navigation: PropTypes.shape({
-//     navigate: PropTypes.func,
-//   }).isRequired,
-// };
-
-// App.wrappedComponent.propTypes = {
-//   authStore: PropTypes.shape().isRequired,
-// };
+export default Splash;

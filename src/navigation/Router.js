@@ -1,8 +1,9 @@
-import { createSwitchNavigator, createStackNavigator } from 'react-navigation';
-import { Home, Splash,Auth } from './../containers';
+import { createSwitchNavigator } from 'react-navigation';
+import { Home, Splash, Auth } from '../containers';
 
 export default createSwitchNavigator({
   Splash,
-  Auth,
   Home,
+  Auth,
+}, {
 });
