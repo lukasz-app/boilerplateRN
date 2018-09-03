@@ -8,7 +8,7 @@ import styles from './styles';
 
 @inject('navigationStore')
 @observer
-class Auth extends Component {
+export default class Auth extends Component {
 static navigationOptions = {
   header: null,
 };
@@ -24,5 +24,3 @@ render() {
   );
 }
 }
-
-export default Auth;

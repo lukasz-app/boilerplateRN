@@ -1,0 +1,12 @@
+Todos: 
+  ☐ // TODO: RESEARCH czy potrzebne? @file:///Users/lukaszchludzinski/Documents/Projects/boilerplateRN/src/components/button/index.js#2
+  
+
+
+  'Cmd/Ctrl+Enter' // Triggers `Todo: Toggle Box`
+  'Alt+D' // Triggers `Todo: Toggle Done`
+  'Alt+C' // Triggers `Todo: Toggle Cancelled`
+  'Alt+S' // Triggers `Todo: Toggle Start`
+  'Cmd/Ctrl+Shift+A' // Triggers  `Todo: Archive`
+  https://github.com/fabiospampinato/vscode-todo-plus
+  

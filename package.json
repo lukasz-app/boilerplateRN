@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "postinstall": "rndebugger-open",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "mobx": "^4.1.1",
     "mobx-react": "^5.2.5",
+    "mobx-remotedev": "dayangdata/mobx-remotedev",
     "prop-types": "^15.6.2",
     "react": "16.4.2",
     "react-native": "0.55.4",
@@ -29,6 +31,7 @@
     "eslint-plugin-jsx-a11y": "6.1.1",
     "eslint-plugin-react": "7.11.1",
     "jest": "23.2.0",
+    "react-native-debugger-open": "^0.3.17",
     "react-test-renderer": "16.4.1"
   },
   "jest": {

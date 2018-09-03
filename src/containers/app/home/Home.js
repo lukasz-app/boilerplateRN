@@ -1,52 +1,68 @@
 import React, { Component } from 'react';
 import {
-  View, Text, TouchableOpacity,
+  View, Text, TouchableOpacity, ScrollView,
 } from 'react-native';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
 import styles from './styles';
-import NavigationStore from '../../../stores/NavigationStore';
+import AppStore from '../../../stores/AppStore';
+import { Button } from '../../../components';
 
-@inject('navigationStore')
+@inject('navigationStore', 'appStore')
 @observer
-class App extends Component {
+export default class Home extends Component {
   static propTypes = {
-    navigationStore: PropTypes.shape(NavigationStore),
+    // navigationStore: PropTypes.shape(NavigationStore),
+    appStore: PropTypes.shape(AppStore),
   }
 
-static navigationOptions = {
-  header: null,
-};
+  static navigationOptions = {
+    title: 'Home',
+  };
 
 
-componentDidMount = () => {
-  const {
-    navigationStore: {
-      navigate,
-    },
-  } = this.props;
-};
+  render() {
+    const {
+      appStore: {
+        count, add, subtract,
+      },
+    } = this.props;
+    console.log(' home render , count : ', count);
+    const items = [];
+    for (let index = 0; index < count; index++) {
+      items.push(<View style={styles.item} key={`keyForIndex:${index}`} />);
+    }
 
-render() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.titleText}>
-        {'APP'}
-      </Text>
-      <TouchableOpacity
-        onPress={() => console.log('presssssed')}
-      >
+    return (
+      <View style={styles.container}>
+        <View style={styles.contentContainerWrapper}>
+          <ScrollView
+            style={styles.contentContainer}
+            contentContainerStyle={styles.contentContainerNested}
+          >
+            {items}
+          </ScrollView>
+        </View>
         <View
-          style={{
-            height: 100,
-            width: 100,
-            backgroundColor: 'red',
-          }}
-        />
-      </TouchableOpacity>
-    </View>
-  );
+          style={styles.buttonsContainer}
+        >
+          <Button
+            label="+"
+            style={styles.button}
+            labelStyle={styles.buttonLabel}
+            onPress={add}
+            active
+          />
+          <Button
+            label="-"
+            style={styles.button}
+            labelStyle={styles.buttonLabel}
+            onPress={subtract}
+            active
+          />
+          <View style={styles.buttonPlaceholder} />
+        </View>
+      </View>
+    );
+  }
 }
-}
-
-export default App;

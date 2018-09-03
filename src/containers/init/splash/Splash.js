@@ -9,7 +9,7 @@ import NavigationStore from '../../../stores/NavigationStore';
 
 @inject('navigationStore')
 @observer
-class Splash extends Component {
+export default class Splash extends Component {
   static propTypes = {
     navigationStore: PropTypes.shape(NavigationStore),
   }
@@ -26,7 +26,7 @@ componentDidMount = () => {
   } = this.props;
   setTimeout(() => {
     navigate('Home');
-  }, 3000);
+  }, 500);
 };
 
 
@@ -40,5 +40,3 @@ render() {
   );
 }
 }
-
-export default Splash;

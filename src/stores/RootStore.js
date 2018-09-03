@@ -4,18 +4,18 @@ import AuthStore from './AuthStore';
 import NavigationStore from './NavigationStore';
 
 
-configure({ enforceActions: true });
+// configure({ enforceActions: true });
 
-export default class RootStore {
+class RootStore {
   constructor() {
-    configure({ enforceActions: true });
-    this.appStore = new AppStore(this);
-    this.authStore = new AuthStore(this);
-    this.navigationStore = new NavigationStore(this);
     this.stores = {
-      appStore: this.appStore,
-      authStore: this.authStore,
-      navigationStore: this.navigationStore,
+      appStore: new AppStore(this.getStores),
+      authStore: new AuthStore(this.getStores),
+      navigationStore: new NavigationStore(this.getStores),
     };
   }
+
+  getStores = () => this.stores;
 }
+
+export default RootStore;
