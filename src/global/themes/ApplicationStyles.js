@@ -4,7 +4,11 @@ import Colors from './Colors';
 
 // This file is for a reusable grouping of Theme items.
 // Similar to an XML fragment layout in Android
-
+const {
+  baseColors,
+  appColors,
+  defaults,
+} = Colors;
 const ApplicationStyles = {
   mainContainer: {
     flex: 1,

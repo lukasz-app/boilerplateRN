@@ -7,7 +7,7 @@ export default class AppStore {
     this.getStores = getStores;
   }
 
-  @remotedev({ name: 'Count' })
+  // @remotedev({ name: 'Count' })
   @observable count = 1;
 
   @action

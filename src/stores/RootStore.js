@@ -4,8 +4,6 @@ import AuthStore from './AuthStore';
 import NavigationStore from './NavigationStore';
 
 
-// configure({ enforceActions: true });
-
 class RootStore {
   constructor() {
     this.stores = {

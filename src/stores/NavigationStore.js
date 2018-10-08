@@ -19,7 +19,7 @@ function getPrevState(state) {
   return childRoutePrev;
 }
 
-@remotedev({ name: 'NavigationStore', filters: { blacklist: ['setNavigator'] } })
+// @remotedev({ name: 'NavigationStore', filters: { blacklist: ['setNavigator'] } })
 export default class NavigationStore {
   @observable currentRouteName = '';
 
@@ -50,22 +50,11 @@ export default class NavigationStore {
     this.setCurrentRouteName(this.getCurrentRouteName());
   }
 
-  resetAndNavigate = (routeName, params) => {
-    this.navigator.dispatch(StackActions.reset({
-      index: 1,
-      actions: [
-        NavigationActions.navigate({ routeName: '' }),
-        NavigationActions.navigate({ routeName, params }),
-      ],
-    }));
-    this.currentRouteName = routeName;
-  }
-
 
   getCurrentRouteName = () => this.navigator && getCurrentState(this.navigator.state.nav).routeName;
 
 
-  getPrevRouteName = () => getPrevState(this.navigator.state.nav).routeName;
+  getPrevRouteName = () => this.navigator && getPrevState(this.navigator.state.nav).routeName;
 
   @action
   clearStore = () => {

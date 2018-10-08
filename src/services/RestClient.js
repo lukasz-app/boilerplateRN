@@ -1,5 +1,19 @@
 import axios from 'axios';
 
+
+const getEndpointFromConf = ({url,baseURL})=>url.replace(baseURL, '');
+
+const stdInterceptor = (reqOrRes)=>{
+  if(reqOrRes.url && reqOrRes.baseURL){
+    // request 
+    console.log(`Starting Request: ${getEndpointFromConf(reqOrRes)} \n`, reqOrRes);
+  } else{
+    //response
+    console.log(`Response: ${getEndpointFromConf(reqOrRes.config)} \n`, reqOrRes);
+  }
+  return reqOrRes;
+}
+
 const instance = axios.create({
   baseURL: 'https://apiurl.com',
   timeout: 20000,
@@ -7,15 +21,8 @@ const instance = axios.create({
 
 class RestClient {
   constructor() {
-    instance.interceptors.request.use((request) => {
-      console.log(`Starting Request: ${request.url.replace(request.baseURL, '')} \n`, request);
-      return request;
-    });
-
-    instance.interceptors.response.use((response) => {
-      console.log(`Response: ${response.config.url.replace(response.config.baseURL, '')} \n`, response);
-      return response;
-    });
+    instance.interceptors.request.use(stdInterceptor);
+    instance.interceptors.response.use(stdInterceptor);
   }
 
   getToken() {
